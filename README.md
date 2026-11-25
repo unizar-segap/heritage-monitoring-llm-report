@@ -6,6 +6,8 @@ Diseño de prompt y código estadístico que convierte los datos de monitorizaci
 
 El módulo calcula estadísticos descriptivos por sensor y los entrega al LLM como un bloque JSON estructurado. Se utilizan instrucciones estrictas que mantienen el informe ceñido a los datos: el modelo no puede inventar valores, separa las observaciones de la interpretación, no emite dictámenes de seguridad estructural y termina con una etiqueta de recomendación fija.
 
+El repositorio contiene el código que genera los *prompts* para el cálculo de los estadísticos por sensor, su serialización como bloque de datos y las instrucciones que guían la redacción del informe por el LLM. Su objetivo es documentar y hacer citable el diseño del *prompt* y el método estadístico, no ofrecer una aplicación ejecutable. Por ello no incluye los modelos de datos (`visualization.models`) ni los clientes de los LLM (`visualization.chatbot`), que forman parte de la plataforma completa del proyecto. Las dependencias que el módulo espera se describen en el apartado [Uso](#uso).
+
 ## Funciones
 
 1. **Calcula estadísticos** para cada sensor asociado a un bien:
@@ -38,7 +40,7 @@ El prompt cita las siguientes normas solo como referencia general. Las notas gen
 
 ## Uso
 
-`prompt.py` es un módulo de una aplicación Django y no funciona de forma independiente. Requiere:
+`prompt.py` forma parte de una aplicación Django y depende de los siguientes elementos de la plataforma, no incluidos en este repositorio:
 
 - Los modelos `Item`, `LeicaTiltReading`, `LeicaTemperatureHumidityReading`, `LeicaPiezometerReading` y `MonitoringSummary`.
 - Los ajustes `CHATBOT_BACKEND` (`"ollama"` o Gemini) y `TIME_ZONE`.
