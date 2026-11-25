@@ -1,6 +1,6 @@
 # LLM-based Heritage Monitoring Report
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24526424.svg)](https://doi.org/10.5281/zenodo.24526424)
 
 Prompt design and statistical code that transform instrumental monitoring data from built heritage assets into a weekly monitoring report written by a Large Language Model (LLM).
 
