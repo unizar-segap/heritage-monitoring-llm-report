@@ -1,2 +1,86 @@
-# heritage-monitoring-llm-report
-Prompt design and statistics code that turns instrumental monitoring data from built-heritage assets into weekly LLM-written monitoring notes, with strict rules for data fidelity, scope limits and statistical interpretation.
+# Informe de monitorización patrimonial con LLM
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+
+Diseño de prompt y código estadístico que convierte los datos de
+monitorización instrumental de bienes del patrimonio construido en una nota
+semanal de monitorización redactada por un LLM.
+
+El módulo calcula estadísticos descriptivos por sensor y los entrega al LLM
+como un bloque JSON estructurado. Unas instrucciones de sistema estrictas
+mantienen el informe ceñido a los datos: el modelo no puede inventar valores,
+separa las observaciones de la interpretación, no emite dictámenes de
+seguridad estructural y termina con una etiqueta de recomendación fija.
+
+## Qué hace
+
+1. **Calcula estadísticos** para cada sensor asociado a un bien:
+   - Media y desviación estándar (σ) históricas sobre todas las lecturas
+     almacenadas.
+   - Media, mínimo y máximo semanales.
+   - Desviaciones estadísticas: lecturas semanales con |x − media| > 3σ.
+2. **Construye el prompt**: una instrucción de sistema con reglas obligatorias
+   (fidelidad a los datos, límites de alcance, interpretación estadística,
+   calidad de los datos y marco normativo) y un prompt de usuario con el
+   bloque de datos JSON y un formato de salida fijo de siete apartados.
+3. **Llama al LLM** (Gemini u Ollama, temperatura 0,2) y guarda en caché un
+   resumen por bien y semana.
+
+Los informes se redactan en español y están dirigidos a responsables de
+conservación del patrimonio.
+
+## Sensores soportados
+
+| Tipo de sensor | Magnitudes                                   |
+|----------------|----------------------------------------------|
+| `6F08-OT-D100` | Inclinación X/Y, distancia, temperatura      |
+| `6306-EO-Tilt` | Inclinación X/Y/Z, temperatura               |
+| `650B-Air-TH`  | Temperatura del aire, humedad del aire       |
+| `6A07-1xVW`    | Frecuencia, resistencia, temperatura         |
+
+La temperatura interna de los sensores se resume, pero no se evalúa como
+desviación.
+
+## Marco normativo
+
+El prompt cita las siguientes normas solo como referencia general. Las notas
+generadas no declaran conformidad con ninguna de ellas:
+
+- UNE-EN 16096:2016: inspección y evaluación del estado del patrimonio
+  construido.
+- ISO 13822:2010: evaluación de estructuras existentes (Anexo I, estructuras
+  patrimoniales).
+- ISO 7870-2:2013: gráficos de control de Shewhart.
+
+## Uso
+
+`prompt.py` es un módulo de una aplicación Django y no funciona de forma
+independiente. Requiere:
+
+- Los modelos `Item`, `LeicaTiltReading`, `LeicaTemperatureHumidityReading`,
+  `LeicaPiezometerReading` y `MonitoringSummary`.
+- Los ajustes `CHATBOT_BACKEND` (`"ollama"` o Gemini) y `TIME_ZONE`.
+- Las funciones `chat_with_gemini` / `chat_with_ollama`, que aceptan
+  `system_prompt_override` y `temperature`.
+
+```python
+from prompt import build_monitoring_prompt, generate_monitoring_summary
+
+system_instruction, user_prompt = build_monitoring_prompt(item_id)  # revisar el prompt
+result = generate_monitoring_summary(item_id)                       # generar y guardar en caché
+```
+
+## Aviso
+
+Las notas generadas son documentos de apoyo automáticos basados en los datos.
+No sustituyen una inspección del estado ni una evaluación estructural
+realizadas por personal cualificado.
+
+## Cita
+
+Si utilizas este código, cítalo mediante su DOI de Zenodo (consulta el
+distintivo de arriba o el archivo `CITATION.cff`).
+
+## Licencia
+
+Consulta [LICENSE](LICENSE).
