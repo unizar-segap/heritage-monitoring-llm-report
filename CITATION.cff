@@ -1,0 +1,51 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite it using the metadata from this file."
+type: software
+title: "LLM-based Heritage Monitoring Report"
+abstract: >-
+  Prompt design and statistical code that transform instrumental monitoring
+  data from built heritage assets into a weekly monitoring report written by a
+  Large Language Model (LLM). The module calculates descriptive statistics for
+  each sensor (historical mean and standard deviation, weekly mean/min/max, and
+  3σ deviations) and provides them to the LLM as a structured JSON data block,
+  with strict rules for data fidelity, scope limits and statistical
+  interpretation.
+authors:
+    - family-names: "Angás"
+      given-names: "Jorge"
+      affiliation: "Universidad de Zaragoza"
+      orcid: "https://orcid.org/0000-0003-3854-2158"
+    - family-names: "Ruiz"
+      given-names: "Gonzalo"
+      affiliation: "Universidad de Zaragoza"
+      orcid: "https://orcid.org/0000-0002-0342-0225"
+    - family-names: "Iranzo"
+      given-names: "Cristian"
+      affiliation: "Universidad de Zaragoza"
+      orcid: "https://orcid.org/0000-0002-3359-6213"
+    - family-names: "Valladares"
+      given-names: "Carlos"
+      affiliation: "Universidad de Zaragoza"
+      orcid: "https://orcid.org/0009-0009-4180-0753"
+    - family-names: "Piedrafita"
+      given-names: "Fernando"
+      affiliation: "Universidad de Zaragoza"
+doi: 10.5281/zenodo.24526424
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.24526424
+    description: "Zenodo archive of the software"
+repository-code: "https://github.com/unizar-segap/heritage-monitoring-llm-report"
+url: "https://github.com/unizar-segap/heritage-monitoring-llm-report"
+license: MIT
+version: "1.0.2"
+date-released: "2026-11-25"
+keywords:
+  - cultural heritage
+  - built heritage
+  - structural health monitoring
+  - large language models
+  - prompt engineering
+  - sensor data
+  - statistical process control
+  - automated reporting
