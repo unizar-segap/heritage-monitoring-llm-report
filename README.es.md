@@ -1,6 +1,6 @@
 # Informe de monitorización patrimonial con LLM
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24526424.svg)](https://doi.org/10.5281/zenodo.24526424)
 
 Diseño de prompt y código estadístico que convierte los datos de monitorización instrumental de bienes del patrimonio construido en una nota semanal de monitorización redactada por un LLM.
 
